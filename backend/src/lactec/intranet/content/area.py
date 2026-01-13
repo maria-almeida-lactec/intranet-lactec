@@ -18,17 +18,6 @@ class IArea(model.Schema):
             "telefone",
         ],
     )
-    model.fieldset(
-        "endereço",
-        _("Endereço"),
-        fields=[
-            "endereco",
-            "complemento",
-            "cidade",
-            "estado",
-            "cep",
-        ],
-    )
     email = Email(
         title=_("Email"),
         required=True,
@@ -42,34 +31,42 @@ class IArea(model.Schema):
         constraint=validadores.is_valid_telefone,
     )
 
+    model.fieldset(
+        "endereco",
+        _("Endereço"),
+        fields=[
+            "endereco",
+            "complemento",
+            "cidade",
+            "estado",
+            "cep",
+        ],
+    )
     endereco = schema.TextLine(
         title=_("Endereço"),
-        description=_("Informe o endereço"),
         required=False,
+        default="",
     )
-
     complemento = schema.TextLine(
         title=_("Complemento"),
-        description=_("Informe o complemento"),
+        description=_("Ex. Anexo, Sala"),
         required=False,
+        default="",
     )
-
     cidade = schema.TextLine(
         title=_("Cidade"),
-        description=_("Informe a cidade"),
         required=False,
+        default="",
     )
-
-    estado = schema.TextLine(
+    estado = schema.Choice(
         title=_("Estado"),
-        description=_("Informe o estado"),
+        vocabulary="lactec.intranet.vocabulary.estados",
         required=False,
     )
-
     cep = schema.TextLine(
         title=_("CEP"),
-        description=_("Informe o CEP"),
         required=False,
+        default="",
     )
 
 

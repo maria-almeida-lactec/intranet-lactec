@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '@plone/components';
-import type { Area } from 'volto-lactec-intranet/types/content';
+import type { Area } from '../../types/content';
 
 interface EnderecoInfoProps {
   content: Area;
@@ -8,22 +8,29 @@ interface EnderecoInfoProps {
 
 const EnderecoInfo: React.FC<EnderecoInfoProps> = ({ content }) => {
   const { endereco, complemento, cidade, estado, cep } = content;
-
-  const enderecoCompleto = [
-    endereco,
-    complemento,
-    cidade && estado ? `${cidade}/${estado}` : null,
-    cep,
-  ]
-    .filter(Boolean)
-    .join(' – ');
-
   return (
-    <Container narrow className="endereco-info">
-      <span className="label" style={{ fontWeight: 'bold' }}>
-        Endereço:{' '}
-      </span>
-      {enderecoCompleto && <span className="endereco">{enderecoCompleto}</span>}
+    <Container narrow className={'endereco-info'}>
+      {endereco && (
+        <Container>
+          <span className="endereco">{endereco}</span>
+        </Container>
+      )}
+      {complemento && (
+        <Container>
+          <span className="complemento">{complemento}</span>
+        </Container>
+      )}
+      {cidade && estado && (
+        <Container>
+          <span className="cidade">{cidade}</span> {' - '}
+          <span className="estado">{estado.token}</span>
+        </Container>
+      )}
+      {cep && (
+        <Container>
+          <span className="cep">{cep}</span>
+        </Container>
+      )}
     </Container>
   );
 };
