@@ -5,6 +5,7 @@ import { Container } from '@plone/components';
 import ContactInfo from 'volto-lactec-intranet/components/ContactInfo/ContactInfo';
 import EnderecoInfo from 'volto-lactec-intranet/components/EnderecoInfo/EnderecoInfo';
 import type { Pessoa } from 'volto-lactec-intranet/types/content';
+import AreaInfo from 'volto-lactec-intranet/components/AreaInfo/AreaInfo';
 
 interface PessoaViewProps {
   content: Pessoa;
@@ -40,7 +41,7 @@ const PessoaView: React.FC<PessoaViewProps> = (props) => {
         )}
         {content.area && (
           <UniversalLink className={'area'} item={content.area}>
-            {content.area.title}
+            <AreaInfo content={content.area} icon={true} />
           </UniversalLink>
         )}
         <ContactInfo content={content} />
