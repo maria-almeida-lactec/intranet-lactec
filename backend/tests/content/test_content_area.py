@@ -102,7 +102,8 @@ class TestArea:
         with api.env.adopt_roles(["Manager"]):
             area = api.content.create(
                 container=container,
-                **area_payload,)
+                **area_payload,
+            )
         assert area.exclude_from_nav is False
         area.description = ""
         notify(ObjectModifiedEvent(area))
@@ -110,4 +111,3 @@ class TestArea:
         area.description = "Descrição da área atualizada"
         notify(ObjectModifiedEvent(area))
         assert area.exclude_from_nav is False
-
